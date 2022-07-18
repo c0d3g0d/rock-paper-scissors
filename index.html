@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <Script>
+        function getComputerChoice()
+        {
+            const choices = ['rock', 'paper', 'scissors'];
+            let choice = Math.floor(Math.random() * 3);
+            return choices[choice];
+        }
+
+        function play(playerSelection, computerSelection)
+        {
+            playerSelection = playerSelection.toLowerCase();
+
+            switch (playerSelection)
+            {
+                case 'rock':
+                    return computerSelection == 'rock' ? 'Tie!' : 
+                         computerSelection == 'paper' ? 'You Lose!\nPaper beats Rock' :
+                         'You Win!\nRock beats Scissors';
+
+                case 'paper':
+                    return computerSelection == 'rock' ? 'You Win!\nPaper beats Rock' : 
+                           computerSelection == 'paper' ? 'Tie!' :
+                         'You Lose!\nScissors beat Paper';
+
+                case 'scissors':
+                    return computerSelection == 'rock' ? 'You Lose!\nRock beats Scissors' : 
+                           computerSelection == 'paper' ? 'You Win!\nScissors beat Paper' :
+                         'Tie!';
+                default:
+                    return 'Invalid choice!';
+            }
+        }
+    </Script>
+    
+</body>
+</html>
