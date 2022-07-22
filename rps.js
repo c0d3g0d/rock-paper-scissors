@@ -1,3 +1,10 @@
+document.querySelectorAll(".user-selection button").forEach(btn => btn.addEventListener(
+    'click', () => console.log(play(btn.className, getComputerSelection()))
+));
+
+
+
+
 function getComputerSelection()
         {
             const choices = ['rock', 'paper', 'scissors'];
@@ -7,7 +14,6 @@ function getComputerSelection()
 
         function play(playerSelection, computerSelection)
         {
-            playerSelection = playerSelection.toLowerCase();
 
             switch (playerSelection)
             {
