@@ -43,12 +43,8 @@ function game() {
     updateScores(playerScore, computerScore);
 
     const bthNodelist = document.querySelectorAll(".user-selection button");
-    bthNodelist.forEach(btn => btn.addEventListener(
-        'click', () => updateGame(btn)
-    ));
+    bthNodelist.forEach(btn => btn.onclick = () => {
 
-
-    function updateGame(btn){
         playerSelection = btn.className;
         gameStatus = play(playerSelection, getComputerSelection());
         winner = gameStatus[0];
@@ -72,7 +68,7 @@ function game() {
 
         if (highestScore >= 5) {
             console.log(highestScore);
-            bthNodelist.forEach(btn => btn.setAttribute('disabled', true));
+            bthNodelist.forEach(btn => btn.onclick = "");
             resultNode.textContent = checkWinner(playerScore, computerScore);
             const playAgainBtn = document.createElement('button');
             playAgainBtn.textContent = "Play Again";
@@ -81,7 +77,9 @@ function game() {
             resultNode.appendChild(playAgainBtn);
 
         }
-    }
+
+
+    });
 }
 
 
