@@ -66,7 +66,11 @@ function game() {
                 console.log(highestScore);
                 bthNodelist.forEach(btn => btn.setAttribute('disabled', true));
                 resultNode.textContent = checkWinner(playerScore, computerScore);
-                
+                const playAgainContainer = document.createElement('div');
+                const playAgainBtn = document.createElement('button');
+                playAgainBtn.textContent = "Play Again";
+                playAgainContainer.appendChild(playAgainBtn);
+                resultNode.appendChild(playAgainContainer);
 
             }
         }
