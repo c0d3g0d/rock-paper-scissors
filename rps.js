@@ -37,7 +37,7 @@ function game() {
     let message = null;
 
     const resultContainer = document.querySelector('.result');
-    resultContainer.innerHTML = '<h1>Result</h1><p></p>';
+    resultContainer.innerHTML = '<p></p>';
     const resultNode = document.querySelector('.result p');
 
     updateScores(playerScore, computerScore);
@@ -74,7 +74,7 @@ function game() {
             playAgainBtn.textContent = "Play Again";
             playAgainBtn.classList.add('play-again-btn');
             playAgainBtn.onclick = game;
-            resultNode.appendChild(playAgainBtn);
+            resultNode.parentElement.appendChild(playAgainBtn);
 
         }
 
