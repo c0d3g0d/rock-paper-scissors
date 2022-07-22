@@ -35,47 +35,53 @@ function game() {
     let gameStatus = null;
     let winner = null;
     let message = null;
+
+    const resultContainer = document.querySelector('.result');
+    resultContainer.innerHTML = '<h1>Result</h1><p></p>';
     const resultNode = document.querySelector('.result p');
 
     updateScores(playerScore, computerScore);
 
     const bthNodelist = document.querySelectorAll(".user-selection button");
     bthNodelist.forEach(btn => btn.addEventListener(
-        'click', () => {
-            playerSelection = btn.className;
-            gameStatus = play(playerSelection, getComputerSelection());
-            winner = gameStatus[0];
-            message = gameStatus[1];
-
-            resultNode.textContent = message;
-
-            switch (winner) {
-                case 'computer':
-                    computerScore++;
-                    break;
-                case 'player':
-                    playerScore++;
-                    break;
-            }
-
-            updateScores(playerScore, computerScore);
-
-            //TODO: check for highest score = 5, annouce winner, and stop the game.
-            let highestScore = Math.max(playerScore, computerScore);
-            if (highestScore >= 5) {
-                console.log(highestScore);
-                bthNodelist.forEach(btn => btn.setAttribute('disabled', true));
-                resultNode.textContent = checkWinner(playerScore, computerScore);
-                const playAgainContainer = document.createElement('div');
-                const playAgainBtn = document.createElement('button');
-                playAgainBtn.textContent = "Play Again";
-                playAgainContainer.appendChild(playAgainBtn);
-                resultNode.appendChild(playAgainContainer);
-
-            }
-        }
+        'click', () => updateGame(btn)
     ));
 
+
+    function updateGame(btn){
+        playerSelection = btn.className;
+        gameStatus = play(playerSelection, getComputerSelection());
+        winner = gameStatus[0];
+        message = gameStatus[1];
+
+        resultNode.textContent = message;
+
+        switch (winner) {
+            case 'computer':
+                computerScore++;
+                break;
+            case 'player':
+                playerScore++;
+                break;
+        }
+
+        updateScores(playerScore, computerScore);
+
+        //TODO: check for highest score = 5, annouce winner, and stop the game.
+        let highestScore = Math.max(playerScore, computerScore);
+
+        if (highestScore >= 5) {
+            console.log(highestScore);
+            bthNodelist.forEach(btn => btn.setAttribute('disabled', true));
+            resultNode.textContent = checkWinner(playerScore, computerScore);
+            const playAgainBtn = document.createElement('button');
+            playAgainBtn.textContent = "Play Again";
+            playAgainBtn.classList.add('play-again-btn');
+            playAgainBtn.onclick = game;
+            resultNode.appendChild(playAgainBtn);
+
+        }
+    }
 }
 
 
