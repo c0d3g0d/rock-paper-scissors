@@ -37,10 +37,10 @@ function game() {
     let message = null;
     const resultNode = document.querySelector('.result p');
 
-    updateScores();
+    updateScores(playerScore, computerScore);
 
-
-    document.querySelectorAll(".user-selection button").forEach(btn => btn.addEventListener(
+    const bthNodelist = document.querySelectorAll(".user-selection button");
+    bthNodelist.forEach(btn => btn.addEventListener(
         'click', () => {
             playerSelection = btn.className;
             gameStatus = play(playerSelection, getComputerSelection());
@@ -58,16 +58,35 @@ function game() {
                     break;
             }
 
-            updateScores();
+            updateScores(playerScore, computerScore);
+
+            //TODO: check for highest score = 5, annouce winner, and stop the game.
+            let highestScore = Math.max(playerScore, computerScore);
+            if (highestScore >= 5) {
+                console.log(highestScore);
+                bthNodelist.forEach(btn => btn.setAttribute('disabled', true));
+                resultNode.textContent = checkWinner(playerScore, computerScore);
+                
+
+            }
         }
     ));
 
+}
 
 
-    function updateScores() {
-        const playerScoreNode = document.querySelector('h2.player');
-        const computerScoreNode = document.querySelector('h2.computer');
-        playerScoreNode.textContent = `You: ${playerScore}`;
-        computerScoreNode.textContent = `Computer: ${computerScore}`;
-    }
+function updateScores(playerScore, computerScore) {
+    const playerScoreNode = document.querySelector('h2.player');
+    const computerScoreNode = document.querySelector('h2.computer');
+    playerScoreNode.textContent = `You: ${playerScore}`;
+    computerScoreNode.textContent = `Computer: ${computerScore}`;
+}
+
+
+
+function checkWinner(playerScore, computerScore) {
+
+    return playerScore > computerScore ? 'You Win!' :
+        playerScore < computerScore ? 'You Loose!' : 'It was a tie!';
+
 }
